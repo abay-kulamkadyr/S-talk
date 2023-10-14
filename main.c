@@ -16,7 +16,10 @@ int main(int args, char** argv)
 {
     if(args<4)
     {
-        printf("Too few arguments, finishing the program...\n");
+        printf("Too few arguments\n");
+
+        printf("\x1b[31mUSAGE: s-talk [YOUR DESIRED PORT NUM] [IP-ADDRESS OF THE RECEIVER] [PORT NUM OF THE RECEIVER] \n\x1b");
+
         exit(1);
     }
     
@@ -35,6 +38,12 @@ int main(int args, char** argv)
     Sender_waitForShutdown();
     keyboard_waitForShutdown();
     Screen_waitForShutdown();
+
+    /*Cleanup*/
+    pthread_mutex_destroy(&mutexRecvList);
+    pthread_mutex_destroy(&mutexSendList);
+    pthread_cond_destroy(&sendListCond);
+    pthread_cond_destroy(&recvListCond);
 
     return 0;
 }

@@ -105,5 +105,4 @@ void* receive(void * portNum)
 void Receiver_waitForShutdown()
 {
     pthread_join(recvTh,NULL);
-    
 }
